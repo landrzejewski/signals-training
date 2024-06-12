@@ -1,0 +1,14 @@
+{
+  "trainings": [
+    {
+      "id": 1,
+      "title": "Angular adv",
+      "price": 200
+    },
+    {
+      "id": 2,
+      "title": "React adv",
+      "price": 200
+    }
+  ]
+}
