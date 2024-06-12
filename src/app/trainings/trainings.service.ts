@@ -1,8 +1,7 @@
 import {inject, Injectable} from "@angular/core";
 import {Training} from "./training.type";
-import {HttpClient, HttpContext} from "@angular/common/http";
-import {firstValueFrom, Observable} from "rxjs";
-import {SkipLoadingIndicator} from "../shared/loafing.interceptor";
+import {HttpClient} from "@angular/common/http";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

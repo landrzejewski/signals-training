@@ -14,6 +14,6 @@ export const loadingInterceptor: HttpInterceptorFn =
     loadingIndicatorService.startLoading();
     return next(request)
       .pipe(
-        finalize(loadingIndicatorService.finishLoading)
+        finalize(() => loadingIndicatorService.finishLoading())
       )
   }
