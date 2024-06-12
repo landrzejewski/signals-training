@@ -1,4 +1,4 @@
-import {inject, Injectable} from "@angular/core";
+import {inject, Injectable, signal} from "@angular/core";
 import {Training} from "./training.type";
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
@@ -10,6 +10,14 @@ export class TrainingsService {
 
   private httpClient = inject(HttpClient);
   private baseUrl = 'http://localhost:3000/trainings';
+
+  private trainingsState = signal<Training[]>([]);
+  trainings = this.trainingsState.asReadonly();
+
+  refresh() {
+    this.httpClient.get<Training[]>(this.baseUrl)
+      .subscribe(trainings => this.trainingsState.set(trainings));
+  }
 
   async getAll(): Promise<Training[]> {
     const trainings$ = this.httpClient.get<Training[]>(this.baseUrl, {
