@@ -1,7 +1,15 @@
 <h1>Trainings</h1>
+Title: <input [(ngModel)]="title">
+Price: <input [(ngModel)]="price">
+<button (click)="add()">Add</button>
 <app-loading-indicator/>
-@for (training of trainings(); track  training) {
+<div class="trainings">
+@for (training of trainings(); track training) {
   <div>
     {{ training.title }}
   </div>
 }
+</div>
+<div>
+Total: {{ trainingsCount() }}
+</div>

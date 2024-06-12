@@ -23,12 +23,24 @@ export class TrainingsService {
     const trainings$ = this.httpClient.get<Training[]>(this.baseUrl, {
       // context: new HttpContext().set(SkipLoadingIndicator, true)
     });
-    return await firstValueFrom(trainings$);
+    try {
+      return await firstValueFrom(trainings$);
+    } catch (ex) {
+      return Promise.reject('Fetch failed');
+    }
   }
 
   async getById(id: number): Promise<Training> {
     const training$ = this.httpClient.get<Training>(`${this.baseUrl}/${id}`);
     return await firstValueFrom(training$);
+  }
+
+  add(training: Training) {
+    this.httpClient.post(this.baseUrl, training)
+      .subscribe(value => {
+        this.refresh();
+        //this.trainingsState.update(trainings => [...trainings, training]);
+      });
   }
 
 }
